@@ -23,7 +23,7 @@ url = Addressable::URI.new(
   }
 ).to_s
 
-puts RestClient.get(url)
+  puts RestClient.get(url)
 
 def create_user
   url = Addressable::URI.new(
@@ -33,8 +33,13 @@ def create_user
     path: '/users.json'
   ).to_s
 
-  puts RestClient.post(
-    url,
-    { user: { name: "Gizmo", email: "gizmo@gizmo.gizmo" } }
-  )
+  begin
+    puts RestClient.post(
+      url,
+      { user: { name: "Gizmo", email: "gizmo@gizmo.gizmo" } }
+    )
+  rescue RestClient::Exception => e
+    puts "no no no"
+    puts "error was #{e.message}"
+  end
 end
